@@ -23,7 +23,7 @@ class LDE:
 
         self.tamanho += 1
 
-    def busca_posicao(self, pos):
+    def busca(self, pos):
         """Busca por posicao."""
         if not pos >= 0:
             return -1
@@ -36,6 +36,28 @@ class LDE:
                 return -1
 
         return elemento.conteudo
+
+    def remove(self, pos):
+        """Deleta por posicao."""
+        if not pos >= 0 or self.tamanho == 0 or pos >= self.tamanho:
+            return False
+
+        if pos == 0:
+            self.primeiro = self.primeiro.proximo if self.tamanho > 1\
+                else None
+        else:
+            elemento = self.primeiro
+            for i in range(pos - 1):
+                if elemento.proximo:
+                    elemento = elemento.proximo
+            if elemento.proximo.proximo:
+                elemento.proximo = elemento.proximo.proximo
+            else:
+                elemento.proximo = None
+
+        self.tamanho -= 1
+
+        return True
 
     def __str__(self):
         """Usado para dar print na lista."""
