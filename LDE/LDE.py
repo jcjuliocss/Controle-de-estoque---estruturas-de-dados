@@ -25,7 +25,7 @@ class LDE:
 
     def busca(self, pos):
         """Busca por posicao."""
-        if not pos >= 0:
+        if not pos < 0:
             return -1
 
         elemento = self.primeiro
@@ -39,7 +39,7 @@ class LDE:
 
     def remove(self, pos):
         """Deleta por posicao."""
-        if not pos >= 0 or self.tamanho == 0 or pos >= self.tamanho:
+        if pos < 0 or self.tamanho == 0 or pos >= self.tamanho:
             return False
 
         if pos == 0:
