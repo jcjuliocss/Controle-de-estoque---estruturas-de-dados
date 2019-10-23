@@ -24,6 +24,44 @@ class LDDE:
 
         self.tamanho += 1
 
+    def busca(self, pos):
+        """Busca por posicao."""
+        if pos < 0:
+            return -1
+
+        elemento = self.primeiro
+        for i in range(pos):
+            if elemento.proximo:
+                elemento = elemento.proximo
+            else:
+                return -1
+
+        return elemento.conteudo
+
+    def remove(self, pos):
+        """Remove por posicao."""
+        if pos < 0 or pos >= self.tamanho or self.tamanho == 0:
+            return False
+
+        if pos == 0:
+            self.primeiro = self.primeiro.proximo if self.tamanho > 1\
+                else None
+        elif pos == self.tamanho - 1:
+            self.ultimo.anterior.proximo = None
+            self.ultimo = self.ultimo.anterior
+        else:
+            elemento = self.primeiro
+            for i in range(pos):
+                if elemento.proximo:
+                    elemento = elemento.proximo
+            if elemento.proximo:
+                elemento.anterior.proximo = elemento.proximo
+                elemento.proximo.anterior = elemento.anterior
+
+        self.tamanho -= 1
+
+        return True
+
     def __str__(self):
         """Permite o print direto na instancia da lista."""
         elemento = self.primeiro
