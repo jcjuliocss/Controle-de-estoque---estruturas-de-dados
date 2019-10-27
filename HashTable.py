@@ -43,7 +43,31 @@ class HashTable:
 
         return padrao
 
+    def remove(self, chave):
+        """Remove elemento por chave."""
+        if chave not in self.chaves or \
+                not self.hash_table[self.funcao_hash(chave)]:
+            return False
+
+        if len(self.hash_table[self.funcao_hash(chave)]) == 1:
+            self.hash_table[self.funcao_hash(chave)] = None
+        else:
+            for i, j in enumerate(self.hash_table[self.funcao_hash(chave)]):
+                if j[0] == chave:
+                    self.hash_table[self.funcao_hash(chave)].pop(i)
+                    break
+
+        for i, j in enumerate(self.chaves):
+            if chave == j:
+                self.chaves.pop(i)
+
+        return self
+
     def __iter__(self):
         """Iterador."""
         for i in [(chave, self.busca(chave)) for chave in self.chaves]:
             yield i
+
+    def __len__(self):
+        """Retorna tamanho."""
+        return len(self.chaves)
