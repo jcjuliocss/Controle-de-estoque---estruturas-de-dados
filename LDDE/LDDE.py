@@ -38,6 +38,21 @@ class LDDE:
 
         return elemento.conteudo
 
+    def busca_conteudo(self, conteudo):
+        """Busca por conteudo, retorna posicao."""
+        if self.primeiro.conteudo == conteudo:
+            return 0
+        if self.ultimo.conteudo == conteudo:
+            return self.tamanho - 1
+
+        posicao = 0
+        for i in self:
+            if i == conteudo:
+                return posicao
+            posicao += 1
+
+        return -1
+
     def remove(self, pos):
         """Remove por posicao."""
         if pos < 0 or pos >= self.tamanho or self.tamanho == 0:
@@ -61,6 +76,10 @@ class LDDE:
         self.tamanho -= 1
 
         return True
+
+    def remove_conteudo(self, conteudo):
+        """Remove por conteudo."""
+        return self.remove(self.busca_conteudo(conteudo))
 
     def __str__(self):
         """Permite o print direto na instancia da lista."""
