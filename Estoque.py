@@ -1,5 +1,6 @@
 """."""
 from LDDE import LDDE
+from LES import LES
 from Produto import Produto
 
 
@@ -39,13 +40,34 @@ class Estoque:
                 self.lista_produtos.remove(posicao)
             posicao += 1
 
-    def busca_produto(self, id_produto):
-        """Busca produto por id."""
+    def busca_produto(self, nome_produto):
+        """Busca produto por nome."""
         posicao = 0
         for i in self.lista_produtos:
-            if id_produto == i.descricao.busca('id'):
+            if nome_produto == i.descricao.busca('nome'):
                 return self.lista_produtos.busca(posicao)
             posicao += 1
+
+    def lista_todos_produtos(self):
+        """Lista de todos os produtos."""
+        return self.lista_produtos
+
+    def gera_lista_ordenada(self):
+        """Lista ordenada por prioridade(menor quantidade)."""
+        lista = LES(len(self))
+        for i in self.lista_produtos:
+            lista.end_insert(i)
+
+        aux = None
+        for j in range(len(lista) - 1):
+            for i in range(len(lista) - 1):
+                if int(lista.pos_search(i).descricao.busca("qtd")) >\
+                        int(lista.pos_search(i + 1).descricao.busca("qtd")):
+                    aux = lista.pos_search(i)
+                    lista.pos_insert(lista.pos_search(i + 1), i)
+                    lista.pos_insert(aux, i + 1)
+
+        return lista
 
     def __iter__(self):
         """Iterador."""
