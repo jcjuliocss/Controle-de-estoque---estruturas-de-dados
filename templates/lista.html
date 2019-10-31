@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		div{
+			text-align: center;
+			background-color: #dedede;
+			width: 90%;
+			margin-left: 5%;
+			padding-top: 1%;
+			padding-bottom: 1%;
+			border-radius: 10px;
+		}
+		table{
+			margin: 0 auto;
+		}
+		a{
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<div align="center">
+		{% if qtd_produtos > 0 %}
+			<table border="1px">
+				<tr>
+					<th># Produto</th>
+					<th>Nome</th>
+					<th>Pre&ccedil;o</th>
+					<th>Qtd. M&iacute;nima</th>
+					<th>Quantidade</th>
+				</tr>
+				{% for produto in lista %}
+					<tr>
+						<td>{{ produto.descricao.busca("id") }}</td>
+						<td>{{ produto.descricao.busca("nome") }}</td>
+						<td>{{ produto.descricao.busca("preco") }}</td>
+						<td>{{ produto.descricao.busca("qtd_minima") }}</td>
+						<td>{{ produto.descricao.busca("qtd") }}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<h2>Nenhum Produto Cadastrado!</h2>
+		{% endif %}
+		<a href="/"><input type="button" value="Voltar"></a>
+	</div>
+</body>
+</html>

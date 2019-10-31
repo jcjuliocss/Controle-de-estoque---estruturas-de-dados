@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		div{
+			text-align: center;
+			background-color: #dedede;
+			width: 90%;
+			margin-left: 5%;
+			padding-top: 1%;
+			padding-bottom: 1%;
+			border-radius: 10px;
+		}
+		table{
+			margin: 0 auto;
+		}
+		svg{
+			cursor: pointer;
+		}
+		a{
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<div align="center">
+		<table>
+			{% for produto in lista %}
+				<tr>
+					<td><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" onclick="javascript: confirm('Deseja remover o produto ' + '{{ produto.descricao.busca('nome') }}'+ '?') ? window.location.assign('/remover_produto?id_produto=' + {{ produto.descricao.busca('id') }}) : false"/></svg></td>
+					<td><b>Nome:</b> {{ produto.descricao.busca('nome') }}&nbsp;&nbsp;</td>
+					<td><b>Pre&ccedil;o:</b> {{ produto.descricao.busca('preco') }}&nbsp;&nbsp;</td>
+					<td><b>Quantidade m&iacute;nima:</b> {{ produto.descricao.busca('qtd_minima') }}&nbsp;&nbsp;</td>
+					<td><b>Quantidade:</b> {{ produto.descricao.busca('qtd') }}&nbsp;&nbsp;</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<a href="/"><input type="button" value="Voltar"></a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		label{
+			display: inline-block;
+			width: 190px;
+		}
+		div{
+			text-align: center;
+			background-color: #dedede;
+			width: 50%;
+			height: 300px;
+			margin-left: 25%;
+			padding-top: 1%;
+			padding-bottom: 1%;
+		}
+		a{
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<h2>Cadastrar novo produto</h2>
+		<form action="/processar_cadastro" method="post">
+			<label>Nome:</label><input type="text" name="nome_produto"><br><br>
+			<label>Pre&ccedil;o:</label><input type="text" name="preco_produto"><br><br>
+			<label>Quantidade m&iacute;nima:</label><input type="text" name="qtd_minima_produto"><br><br>
+			<label>Quantidade atual:</label><input type="text" name="qtd_produto"><br><br>
+			<input type="submit" value="Cadastrar">
+			<a href="/"><input type="button" value="Voltar"></a>
+		</form>
+	</div>
+</body>
+</html>

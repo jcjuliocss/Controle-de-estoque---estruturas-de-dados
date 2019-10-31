@@ -2,14 +2,36 @@
 <html>
 <head>
 	<title></title>
+	<style type="text/css">
+		a{
+			text-decoration: none;
+		}
+		label{
+			display: inline-block;
+			width: 190px;
+		}
+		div{
+			text-align: center;
+			background-color: #dedede;
+			width: 50%;
+			height: 300px;
+			margin-left: 25%;
+			padding-top: 1%;
+			padding-bottom: 1%;
+			border-radius: 10px;
+		}
+		.btn{
+			width: 250px;
+		}
+	</style>
 </head>
 <body>
-	<form action="/teste" method="post">
-		nome<input type="text" name="nome_produto">
-		preco<input type="text" name="preco_produto">
-		min<input type="text" name="qtd_minima_produto">
-		qtd<input type="text" name="qtd_produto">
-		<input type="submit" value="vai teia">
-	</form>
+	<div>
+		<h2>Controle de estoque</h2>
+		<a href="/lista"><input type="button" value="Listar Produtos" class="btn" "></a><br><br>
+		<a href="/lista_ordenada"><input type="button" value="Listar Produtos(Por quantidade)" class="btn" "></a><br><br>
+		<a href="/cadastrar_produto"><input type="button" value="Cadastrar Produtos" class="btn" "></a><br><br>
+		<a href="/remocao_produtos"><input type="button" value="Remover Produtos" class="btn" "></a><br><br>
+	</div>
 </body>
 </html>
