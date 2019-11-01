@@ -25,6 +25,9 @@
 </head>
 <body>
 	<div align="center">
+		{% if qtd_produtos == 0 %}
+			<h2>Nenhum Produto Cadastrado!</h2>
+		{% endif %}
 		<table>
 			{% for produto in lista %}
 				<tr>
