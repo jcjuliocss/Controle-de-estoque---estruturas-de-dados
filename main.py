@@ -1,8 +1,9 @@
 """."""
 import os
 
-from flask import Flask, render_template, request
 from Estoque import Estoque
+
+from flask import Flask, render_template, request
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -32,7 +33,7 @@ def processar_cadastro():
 
     estoque.insere_produto(nome=nome, preco=preco, qtd_minima=min, qtd=q)
 
-    return index()
+    return cadastrar_produto()
 
 
 @app.route("/lista")
@@ -55,7 +56,8 @@ def lista_ordenada():
 def remocao_produtos():
     """."""
     return render_template("remocao_produto.html",
-                           lista=estoque.lista_todos_produtos())
+                           lista=estoque.lista_todos_produtos(),
+                           qtd_produtos=len(estoque))
 
 
 @app.route("/remover_produto", methods=['GET'])
@@ -65,6 +67,14 @@ def remover_produto():
     estoque.remove_produto(id_produto=int(dados.get('id_produto')))
 
     return remocao_produtos()
+
+
+@app.route("/lista_compras")
+def lista_compras():
+    """."""
+    return render_template('lista.html',
+                           lista=estoque.lista_compras(),
+                           qtd_produtos=len(estoque))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
