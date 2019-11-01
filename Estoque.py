@@ -1,6 +1,11 @@
 """."""
+
 from LDDE import LDDE
+
+from LDE import LDE
+
 from LES import LES
+
 from Produto import Produto
 
 
@@ -66,6 +71,14 @@ class Estoque:
                     aux = lista.pos_search(i)
                     lista.pos_insert(lista.pos_search(i + 1), i)
                     lista.pos_insert(aux, i + 1)
+
+        return lista
+
+    def lista_compras(self):
+        """."""
+        lista = LDE()
+        for i in self.gera_lista_ordenada():
+            lista.insere(i)
 
         return lista
 
