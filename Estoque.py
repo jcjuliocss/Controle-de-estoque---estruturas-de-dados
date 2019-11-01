@@ -27,9 +27,10 @@ class Estoque:
 
         return self.id_produto
 
-    def insere_produto(self, nome, preco, qtd_minima, qtd):
+    def insere_produto(self, nome, preco, qtd_minima, qtd, id_p=None):
         """Insere produto."""
-        produto = Produto(id_produto=self.seta_id(),
+        id_produto = self.seta_id() if not id_p else int(id_p)
+        produto = Produto(id_produto=id_produto,
                           nome=nome,
                           preco=preco,
                           qtd_minima=qtd_minima,
@@ -41,7 +42,7 @@ class Estoque:
         """Remove produto."""
         posicao = 0
         for i in self.lista_produtos:
-            if id_produto == i.descricao.busca('id'):
+            if int(id_produto) == int(i.descricao.busca('id')):
                 self.lista_produtos.remove(posicao)
             posicao += 1
 

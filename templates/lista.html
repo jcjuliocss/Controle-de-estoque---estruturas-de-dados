@@ -37,7 +37,11 @@
 						<td>{{ produto.descricao.busca("nome") }}</td>
 						<td>{{ produto.descricao.busca("preco") }}</td>
 						<td>{{ produto.descricao.busca("qtd_minima") }}</td>
-						<td>{{ produto.descricao.busca("qtd") }}</td>
+						{% if produto.descricao.busca("qtd")|int <= produto.descricao.busca("qtd_minima")|int %}
+							<td><font color="red">{{ produto.descricao.busca("qtd") }}</font></td>
+						{% else %}
+							<td>{{ produto.descricao.busca("qtd") }}</td>
+						{% endif %}
 					</tr>
 				{% endfor %}
 			</table>

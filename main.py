@@ -3,7 +3,7 @@ import os
 
 from Estoque import Estoque
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -72,9 +72,26 @@ def remover_produto():
 @app.route("/lista_compras")
 def lista_compras():
     """."""
-    return render_template('lista.html',
+    return render_template('compras.html',
                            lista=estoque.lista_compras(),
                            qtd_produtos=len(estoque))
+
+
+@app.route("/atualiza_produto")
+def atualiza_produto():
+    """."""
+    dados = request.args
+    nome = dados.get('nome')
+    preco = dados.get('preco')
+    min = dados.get('qtd_minima')
+    q = dados.get('qtd')
+
+    estoque.remove_produto(id_produto=int(dados.get('id_produto')))
+    estoque.insere_produto(nome=nome, preco=preco,
+                           qtd_minima=min, qtd=q,
+                           id_p=int(dados.get('id_produto')))
+
+    return redirect('/lista_compras')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		div{
+			text-align: center;
+			background-color: #dedede;
+			width: 90%;
+			margin-left: 5%;
+			padding-top: 1%;
+			padding-bottom: 1%;
+			border-radius: 10px;
+		}
+		table{
+			margin: 0 auto;
+		}
+		a{
+			text-decoration: none;
+		}
+	</style>
+	<script type="text/javascript">
+		function atualizar_quantidade(tipo_transacao, id_produto, nome, preco, qtd_minima, qtd_atual){
+			qtd = prompt("Por favor, digite a quantidade")
+			qtd = parseInt(qtd)
+			if(qtd <= 0){
+				alert("Digite um valor positivo!")
+				return false
+			}
+			if(tipo_transacao == 1){
+				qtd += parseInt(qtd_atual)
+			}else{
+				if(parseInt(qtd_atual) - qtd >= 0){
+					qtd = parseInt(qtd_atual) - qtd
+				}else{
+					alert("Não é possível vender mais do que a quantidade dísponivel em estoque!")
+					return false
+				}
+			}
+
+			window.location.assign('/atualiza_produto?id_produto='+id_produto+'&nome='+nome+'&preco='+preco+'&qtd_minima='+qtd_minima+'&qtd='+qtd)
+		}
+	</script>
+</head>
+<body>
+	<div align="center">
+		{% if qtd_produtos > 0 %}
+			<table border="1px">
+				<tr>
+					<th># Produto</th>
+					<th>Nome</th>
+					<th>Pre&ccedil;o</th>
+					<th>Qtd. M&iacute;nima</th>
+					<th>Quantidade</th>
+					<th>Comprar</th>
+					<th>Vender</th>
+				</tr>
+				{% for produto in lista %}
+					<tr>
+						<td>{{ produto.descricao.busca("id") }}</td>
+						<td>{{ produto.descricao.busca("nome") }}</td>
+						<td>{{ produto.descricao.busca("preco") }}</td>
+						<td>{{ produto.descricao.busca("qtd_minima") }}</td>
+						{% if produto.descricao.busca("qtd")|int <= produto.descricao.busca("qtd_minima")|int %}
+							<td><font color="red">{{ produto.descricao.busca("qtd") }}</font></td>
+						{% else %}
+							<td>{{ produto.descricao.busca("qtd") }}</td>
+						{% endif %}
+						<td><input type="button" value="Comprar" onclick="atualizar_quantidade(1, {{ produto.descricao.busca("id") }}, '{{ produto.descricao.busca("nome") }}', {{ produto.descricao.busca("preco") }}, {{ produto.descricao.busca("qtd_minima") }}, {{ produto.descricao.busca("qtd") }})"></td>
+						<td><input type="button" value="Vender" onclick="atualizar_quantidade(2, {{ produto.descricao.busca("id") }}, '{{ produto.descricao.busca("nome") }}', {{ produto.descricao.busca("preco") }}, {{ produto.descricao.busca("qtd_minima") }}, {{ produto.descricao.busca("qtd") }})"></td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<h2>Nenhum Produto Cadastrado!</h2>
+		{% endif %}
+		<a href="/"><input type="button" value="Voltar"></a>
+	</div>
+</body>
+</html>
