@@ -67,8 +67,15 @@ class Estoque:
         aux = None
         for j in range(len(lista) - 1):
             for i in range(len(lista) - 1):
-                if int(lista.pos_search(i).descricao.busca("qtd")) >\
-                        int(lista.pos_search(i + 1).descricao.busca("qtd")):
+                if abs((int(lista.pos_search(i).descricao.busca("qtd")) -
+                        int(lista.pos_search(i).descricao.busca("qtd_minima")
+                            )) >
+                        abs(
+                            int(
+                                lista.pos_search(i + 1).descricao.busca(
+                                    "qtd")) -
+                            int(lista.pos_search(i + 1).descricao.busca(
+                                "qtd_minima")))):
                     aux = lista.pos_search(i)
                     lista.pos_insert(lista.pos_search(i + 1), i)
                     lista.pos_insert(aux, i + 1)
