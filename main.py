@@ -27,7 +27,7 @@ def processar_cadastro():
     """."""
     dados = request.form
     nome = dados.get("nome_produto")
-    preco = dados.get("preco_produto")
+    preco = float(dados.get("preco_produto"))
     min = dados.get("qtd_minima_produto")
     q = dados.get("qtd_produto")
 

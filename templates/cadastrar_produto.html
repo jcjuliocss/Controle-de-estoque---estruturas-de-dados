@@ -23,6 +23,8 @@
 	<script type="text/javascript">
 		function processa_cadastro(){
 			qtd = document.getElementById("qtd_produto").value
+			preco = document.getElementById("preco_produto").value.replace(',', '.')
+			document.getElementById("preco_produto").value = parseFloat(preco)
 			if(qtd-parseFloat(qtd) >= 0){
 				alert('Produto cadastrado!')
 				document.getElementById("form_envio").submit()
@@ -37,7 +39,7 @@
 		<h2>Cadastrar novo produto</h2>
 		<form action="/processar_cadastro" method="post" id="form_envio">
 			<label>Nome:</label><input type="text" name="nome_produto"><br><br>
-			<label>Pre&ccedil;o:</label><input type="text" name="preco_produto"><br><br>
+			<label>Pre&ccedil;o:</label><input type="text" name="preco_produto" id="preco_produto"><br><br>
 			<label>Quantidade m&iacute;nima:</label><input type="text" name="qtd_minima_produto"><br><br>
 			<label>Quantidade atual:</label><input type="text" name="qtd_produto" id="qtd_produto"><br><br>
 			<input type="button" value="Cadastrar" onclick="processa_cadastro()">

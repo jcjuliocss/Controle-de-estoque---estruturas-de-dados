@@ -35,7 +35,7 @@
 					<tr>
 						<td>{{ produto.descricao.busca("id") }}</td>
 						<td>{{ produto.descricao.busca("nome") }}</td>
-						<td>{{ produto.descricao.busca("preco") }}</td>
+						<td>R${{ ("%.2f") %(produto.descricao.busca("preco")|float) }}</td>
 						<td>{{ produto.descricao.busca("qtd_minima") }}</td>
 						{% if produto.descricao.busca("qtd")|int <= produto.descricao.busca("qtd_minima")|int %}
 							<td><font color="red">{{ produto.descricao.busca("qtd") }}</font></td>
