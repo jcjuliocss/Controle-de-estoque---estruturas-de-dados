@@ -24,15 +24,15 @@ class LDE:
 
     def busca(self, pos):
         """Busca por posicao."""
-        if not pos < 0:
-            return -1
+        if pos < 0:
+            return None
 
         elemento = self.primeiro
         for i in range(pos):
             if elemento.proximo:
                 elemento = elemento.proximo
             else:
-                return -1
+                return None
 
         return elemento.conteudo
 
